@@ -1,11 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>肌力存摺 Muscle Bank - 首頁</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    網頁設計第二週
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="肌力存摺 Logo" class="header-logo-img"> 
+                <h1><a href="index.html">肌力存摺 Muscle Bank</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首頁</a></li>
+                    <li><a href="quiz.html">自我評估</a></li>
+                    <li><a href="knowledge.html">知識專區</a></li>
+                    <li><a href="guidance.html">運動與飲食</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="hero-section"></section>
+
+        <section class="content-section container" style="margin-top: 20px;"> 
+            
+            <h2 style="text-align: center; color: var(--color-primary);">🧬 預見未來：從科學評估開始規劃您的黃金晚年</h2>
+            <p>肌力存摺 (Muscle Bank) 致力於提高大眾對肌少症的意識。本網站提供國際認可的 SARC-F 快速自我評估工具，幫助您早期發現風險，並提供科學化的運動與營養建議，讓您和家人都能擁有健康、自主的晚年生活。</p>
+            
+            <div class="highlight-cta-section">
+                <h2>今天的力量，就是明天的自由</h2>
+                <p>從第一步開始，積攢肌力資產</p>
+                
+                <a href="quiz.html" id="main-cta-button" class="start-button mega-cta">
+                    💪立即開始肌少症風險快速檢測💪
+                </a>
+            </div>
+
+        </section>
+        
+        <section class="icon-guidance-section content-section container">
+            <div class="icon-cards" style="display: flex; justify-content: space-around; gap: 20px;">
+                <div class="icon-card">
+                    <a href="quiz.html" class="icon-link">
+                        <i class="fas fa-hand-fist icon-large"></i> 
+                        <h3>肌力評估</h3> 
+                        <p>透過 SARC-F 問卷，快速掌握肌少症風險等級</p>
+                    </a>
+                </div>
+                <div class="icon-card">
+                    <a href="knowledge.html" class="icon-link">
+                        <i class="fas fa-book-open icon-large"></i> 
+                        <h3>健康解密</h3> 
+                        <p>了解肌少症的成因、症狀與高風險族群</p>
+                    </a>
+                </div>
+                <div class="icon-card">
+                    <a href="guidance.html" class="icon-link">
+                        <i class="fas fa-utensils icon-large"></i> 
+                        <h3>運動餐食</h3> 
+                        <p>立即獲取居家運動菜單與高蛋白飲食指南</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section container">
+            <h2 class="video-section-title">🎥 影音專區：深入了解肌少症</h2>
+            
+            <div class="video-grid">
+                
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/r47Ue1kcy0U?si=YlmwYl3SFFD0ogI5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="video-caption">老了走不動嗎？盤點五個肌少症的跡象！</p>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/FNrtE11IoHw?si=8PXBadcDPp6NOmvk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="video-caption">肌少症｜動畫影片</p>
+                </div>
+
+            </div>
+        </section>
+        
+    </main>
+
+    <button id="back-to-top" title="回到頂部">↑</button>
+
+    <footer>
+        <div class="container">
+            <p>資料來源：歐盟肌少症工作小組、千禧之愛健康基金會等。 | &copy; 2025 肌力存摺 Muscle Bank.</p>
+            <p style="margin-top: 10px; font-size: 0.85em; color: #BBB;">
+                此網頁為期末報告使用，若有侵權請告知
+            </p>
+            <p style="font-size: 0.85em; color: #BBB;">
+                製作者：柯OO (020)、陳OO (021)
+            </p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    
 </body>
 </html>
