@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>肌力存摺 Muscle Bank - 居家自我檢測</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="images/logo.png" alt="肌力存摺 Logo" class="header-logo-img"> 
+                <h1><a href="index.html">肌力存摺 Muscle Bank</a></h1>
+            </div>
+            <nav>
+                <ul>
+             <li><a href="index.html">首頁</a></li>
+                    <li><a href="quiz.html">居家自我檢測</a></li>
+                    <li><a href="knowledge.html">健康解密專區</a></li>
+                    <li><a href="guidance.html">運動餐食指南</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="page-hero page-hero--primary" role="banner" aria-label="自我評估橫幅">
+            <h1 class="main-title"><i class="fas fa-file-medical-alt"></i> 肌少症風險自我檢測</h1>
+            <p>快速評估您的肌力狀態，掌握健康風險</p>
+        </div>
+
+        <section id="quiz-nav-icons" class="content-section nav-card-container">
+            
+            <div class="nav-box-title">
+                <i class="fas fa-bullhorn"></i> 選擇評估項目
+            </div>
+
+            <p class="nav-instruction">
+                <i class="fas fa-hand-point-down"></i> 請點選下方圖示，選擇您想進行的評估測量項目 <i class="fas fa-hand-point-down"></i>
+            </p>
+
+            <div class="icon-cards quiz-nav-bar">
+                <a href="#sarcf-test" class="icon-card-small">
+                    <i class="fas fa-clipboard-list icon-small" style="color: var(--color-primary);"></i> 
+                    <p>SARC-F 問卷</p>
+                </a>
+                <a href="#calf-section" class="icon-card-small">
+                    <i class="fas fa-ruler-vertical icon-small" style="color: var(--color-teal-action);"></i> 
+                    <p>小腿圍</p>
+                </a>
+                <a href="#ring-section" class="icon-card-small">
+                    <i class="fas fa-hand-paper icon-small" style="color: var(--color-accent);"></i> 
+                    <p>指環測試</p>
+                </a>
+                <a href="#cst-section" class="icon-card-small">
+                    <i class="fas fa-chair icon-small" style="color: var(--color-success);"></i> 
+                    <p>椅子站立 (30秒)</p>
+                </a>
+            </div>
+        </section>
+
+        <div class="section-divider" role="separator" aria-label="章節分隔"></div>
+        
+        <section id="sarcf-test" class="content-section">
+            <h2>1. 肌少症風險自我評估 (SARC-F)</h2> 
+            <div id="quiz-container">
+                <form id="sarcf-quiz">
+                    <h3>自我檢測 - SARC-F 問卷</h3>
+                    <p>請依據您過去一年來的情況，選擇最符合的選項。總分 ≥ 5 分表示高風險。</p>
+                    <div class="question-row">
+                        <div class="question-text">
+                            <fieldset class="question" id="q_strength">
+                                <legend>1. 肌力：您拿起或搬動 5 公斤重（約兩個炒菜鍋）的物品會感到困難嗎？</legend>
+                                <label><input type="radio" name="q_strength" value="0" checked> 沒有困難 (0分)</label><br>
+                                <label><input type="radio" name="q_strength" value="1"> 有一些困難 (1分)</label><br>
+                                <label><input type="radio" name="q_strength" value="2"> 很困難/無法完成 (2分)</label>
+                            </fieldset>
+                        </div>
+                            <figure class="question-figure">
+                                <img src="images/question1.png" alt="搬重物示意圖">
+                                <figcaption>示意：搬重物</figcaption>
+                            </figure>
+                    </div>
+
+                    <div class="question-row">
+                        <div class="question-text">
+                            <fieldset class="question" id="q_walking">
+                                <legend>2. 步行：您走過一個房子的距離會感到困難嗎？</legend>
+                                <label><input type="radio" name="q_walking" value="0" checked> 沒有困難 (0分)</label><br>
+                                <label><input type="radio" name="q_walking" value="1"> 有一些困難 (1分)</label><br>
+                                <label><input type="radio" name="q_walking" value="2"> 很困難/需要使用步行工具/無法完成 (2分)</label>
+                            </fieldset>
+                        </div>
+                            <figure class="question-figure">
+                                <img src="images/question2.png" alt="步行示意圖">
+                                <figcaption>示意：步行困難需協助</figcaption>
+                            </figure>
+                    </div>
+                    <!-- removed duplicated standalone fieldsets for questions 3-5; using .question-row versions below -->
+                        <div class="question-row">
+                            <div class="question-text">
+                                <fieldset class="question" id="q_rise">
+                                    <legend>3. 從椅子上起身：您從椅子或下床站起來會感到困難嗎？</legend>
+                                    <p class="quiz-instruction-detail">*自評標準：若您連續起立/坐下 5 次（不使用手臂輔助）需超過 15 秒，或需藉助手部力量，即代表有中度或高度困難。*</p>
+                                    <label><input type="radio" name="q_rise" value="0" checked> 沒有困難 (0分)</label><br>
+                                    <label><input type="radio" name="q_rise" value="1"> 有一些困難 (1分)</label><br>
+                                    <label><input type="radio" name="q_rise" value="2"> 很困難/沒有他人幫助時無法完成 (2分)</label>
+                                </fieldset>
+                            </div>
+                            <figure class="question-figure">
+                                <img src="images/question3.png" alt="起身示意圖">
+                                <figcaption>示意：椅子上站起與坐下動作</figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="question-row">
+                            <div class="question-text">
+                                <fieldset class="question" id="q_stairs">
+                                    <legend>4. 爬樓梯：您走上 10 階樓梯會感到困難嗎？</legend>
+                                    <label><input type="radio" name="q_stairs" value="0" checked> 沒有困難 (0分)</label><br>
+                                    <label><input type="radio" name="q_stairs" value="1"> 有一些困難 (1分)</label><br>
+                                    <label><input type="radio" name="q_stairs" value="2"> 很困難/無法完成 (2分)</label>
+                                </fieldset>
+                            </div>
+                            <figure class="question-figure">
+                                <img src="images/question4.png" alt="爬樓梯示意圖">
+                                <figcaption>示意：爬樓梯</figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="question-row">
+                            <div class="question-text">
+                                <fieldset class="question" id="q_falls">
+                                    <legend>5. 跌倒：過去 1 年中您跌倒過幾次？</legend>
+                                    <label><input type="radio" name="q_falls" value="0" checked> 沒有跌倒 (0分)</label><br>
+                                    <label><input type="radio" name="q_falls" value="1"> 1-3 次 (1分)</label><br>
+                                    <label><input type="radio" name="q_falls" value="2"> 4 次或以上 (2分)</label>
+                                </fieldset>
+                            </div>
+                            <figure class="question-figure">
+                                <img src="images/question5.png" alt="跌倒風險示意圖">
+                                <figcaption>示意：跌倒</figcaption>
+                            </figure>
+                        </div>
+                    <button type="button" id="calculate-button">計算 SARC-F 總分</button> 
+                </form>
+                <div id="result-display" class="result-box" style="display:none;">
+                    <h3>SARC-F 評估結果</h3>
+                    <p id="score-display"></p>
+                    <p id="risk-display"></p>
+                </div>
+            </div> 
+        </section> 
+
+        <div class="section-divider" role="separator" aria-label="章節分隔"></div>
+        
+        <section class="content-section">
+            <h2>2. 輔助居家體態檢測</h2>
+            <div id="calf-section">
+                <h3>測量小腿圍 (Method 1)</h3> 
+                <p>以皮尺繞過小腿最寬位置。50歲以上標準：男性小於 34公分，女性小於 33公分，表示可能肌肉量不足。</p>
+                <div class="assessment-layout">
+                    <div class="assessment-content">
+                        <div class="input-group"><label for="calf-gender">性別：</label><select id="calf-gender"><option value="male">男</option><option value="female">女</option></select></div>
+                        <div class="input-group"><label for="calf-cm">小腿圍 (cm)：</label><input type="number" id="calf-cm" min="10" placeholder="例如: 32"></div>
+                        <button type="button" id="calculate-calf">評估小腿圍風險</button>
+                        <p id="calf-result" class="result-box" style="display: none;"></p>
+                    </div>
+                    <div class="assessment-image">
+                        <img src="images/calf_measure.png" alt="小腿圍測量示意圖">
+                        <p class="image-caption">示意圖：測量小腿最粗處</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider-small" role="separator" aria-label="小分隔"></div>
+
+            <div id="ring-section">
+                <h3>指環測試 (Yubi-wakka, Method 2)</h3>
+                <p>用兩隻手的食指和拇指將小腿最粗的部分包圍起來。</p>
+                <div class="assessment-layout">
+                    <div class="assessment-content">
+                        <fieldset class="question"><legend>指環測試結果:</legend><label><input type="radio" name="q_ring" value="0" checked> 指環無法包圍</label><br><label><input type="radio" name="q_ring" value="1"> 指環剛好包圍</label><br><label><input type="radio" name="q_ring" value="2"> 指環可完全包圍且有空隙</label></fieldset>
+                        <button type="button" id="calculate-ring">評估指環測試風險</button>
+                        <p id="ring-result" class="result-box" style="display: none;"></p>
+                    </div>
+                    <div class="assessment-image">
+                        <img src="images/finger_ring_test.png" alt="指環測試示意圖">
+                        <p class="image-caption">示意圖：雙手食指拇指圍繞小腿</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider-small" role="separator" aria-label="小分隔"></div>
+
+            <div id="cst-section">
+                <h3>30 秒椅子起立測試 (Method 3)</h3>
+                <div class="cst-special-layout" style="margin-bottom: 30px;">
+                    <div class="assessment-content">
+                        <p class="warning-message"><i class="fas fa-triangle-exclamation"></i> 特別注意：需旁邊有人陪同才能做，避免發生危險！</p>
+                        <ol class="steps-list cst-text-style">
+                            <li><strong>步驟1：</strong>找一張有靠背的椅子，最好能靠在牆上，並確認椅子不會滑動</li>
+                            <li><strong>步驟2：</strong>雙手交叉放在胸前，手不可以碰到椅子</li>
+                            <li><strong>步驟3：</strong>坐在椅子上，然後起身，身體要完全伸直，不可以微彎，完全站直後再坐下</li>
+                            <li><strong>步驟4：</strong>坐在椅子後「要完整坐下」，不可以只是用屁股輕輕碰到椅子就站起來喔</li>
+                            <li><strong>步驟5：</strong>30秒內，看自己能完整坐這套動作幾下</li>
+                        </ol>
+                    </div>
+                    <div class="assessment-image">
+                        <img src="images/chair_stand_test.png" alt="30秒椅子起立測試示範" class="img-shrink">
+                        <p class="image-caption">示意圖：雙手抱胸，完整起立坐下</p>
+                    </div>
+                </div>
+
+                <p style="font-weight: bold; margin-bottom: 10px;">次數正常值參考表 (次數低於下表即為風險指標)：</p>
+                <table class="small-table">
+                    <thead><tr><th>年齡</th><th>男 (次)</th><th>女 (次)</th></tr></thead>
+                    <tbody>
+                        <tr><td>60–64</td><td>14</td><td>12</td></tr>
+                        <tr><td>65–69</td><td>12</td><td>11</td></tr>
+                        <tr><td>70–74</td><td>12</td><td>10</td></tr>
+                        <tr><td>75–79</td><td>11</td><td>10</td></tr>
+                        <tr><td>80–84</td><td>10</td><td>9</td></tr>
+                        <tr><td>85–89</td><td>8</td><td>8</td></tr>
+                        <tr><td>90–94</td><td>7</td><td>4</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="input-group"><label for="cst-gender">性別：</label><select id="cst-gender"><option value="male">男</option><option value="female">女</option></select></div>
+                <div class="input-group"><label for="cst-age">年齡：</label><input type="number" id="cst-age" min="60" max="100" placeholder="例如: 65"></div>
+                <div class="input-group"><label for="cst-reps">30秒內完成次數：</label><input type="number" id="cst-reps" min="0" placeholder="例如: 15"></div>
+                <button type="button" id="calculate-cst">評估 30 秒測試風險</button>
+                <p id="cst-result" class="result-box" style="display: none;"></p>
+            </div>
+        </section>
+    </main>
+
+    <button id="back-to-top" title="回到頂部">TOP</button>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 肌力存摺 Muscle Bank.</p>
+            <p style="margin-top: 10px; font-size: 1.2em; color: #BBB;">
+                此網頁為期末報告使用，若有侵權請告知
+            </p>
+            <p style="font-size: 1.2em; color: #BBB;">
+                製作者：柯OO (020)、陳OO (021)
+            </p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>

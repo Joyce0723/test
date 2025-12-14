@@ -1,0 +1,1114 @@
+/* 設定中高齡友善的基礎樣式 */
+
+/* === 全域設定 === */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* === 顏色變數定義 === */
+:root {
+    --color-primary: #FF8A65; /* 珊瑚橙 */
+    --color-secondary: #FFE0B2; /* 淺奶油橘 */
+    --color-success: #66BB6A; /* 柔和綠色 (標語/CTA) */
+    --color-background: #F5F5F5; /* 頁面主背景 */
+    --color-dark: #333333;
+    --color-light-text: #FFFFFF;
+    --color-border: #CCCCCC;
+    --color-accent: #FFD79B; /* 金黃色 */
+    --color-cool-rest: #B2DFDB; /* 淺青色 */
+    --color-teal-action: #4DB6AC; /* 藍綠色 */
+    
+    /* 結果框顏色定義 */
+    --risk-low: #C8E6C9;      
+    --risk-moderate: #FFE0B2; 
+    --risk-high: #FFCDD2;     
+}
+
+body {
+    font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    line-height: 1.6;
+    /* 基礎字體調整：放大到 16px-20px */
+    font-size: clamp(16px, 1.2vw + 12px, 20px); 
+    padding-top: 80px; /* 預留 Header 空間 */
+    scroll-behavior: smooth; 
+}
+
+/* === 文字易讀性：可重用的內容排版工具類 (.prose) === */
+.prose {
+    max-width: 70ch; /* 理想閱讀寬度 */
+    margin: 0 auto;
+    padding: 0 14px;
+    font-size: clamp(16px, 1.2vw + 12px, 18px);
+    line-height: 1.75; /* 增加行高幫助掃讀 */
+    color: var(--color-dark);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    hyphens: auto;
+}
+.prose p { margin: 1rem 0; }
+.prose h1, .prose h2, .prose h3, .prose h4 { color: var(--color-primary); line-height: 1.25; margin-top: 1.25em; margin-bottom: 0.5em; }
+.prose h2 { font-size: clamp(20px, 2vw + 12px, 28px); }
+.prose h3 { font-size: clamp(18px, 1.6vw + 12px, 22px); }
+.prose ul, .prose ol { margin: 0.6rem 0 0.8rem 1.25rem; }
+.prose li { margin-bottom: 0.45rem; }
+.prose .lead { font-size: 1.05em; font-weight: 600; color: var(--color-teal-action); }
+.prose a { color: var(--color-teal-action); text-decoration: underline; text-decoration-thickness: 2px; }
+.prose blockquote { border-left: 4px solid var(--color-teal-action); padding: 10px 14px; background: #F7FFFA; border-radius: 8px; color: #2f5d47; margin: 1rem 0; }
+.prose code { background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Noto Sans Mono", monospace; }
+.prose table { width: 100%; }
+
+@media (max-width: 760px) {
+    .prose { padding: 0 20px; font-size: 16px; }
+}
+
+/* 確保 main 標籤不限制寬度 */
+main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 內容區塊置中 (共用類別) */
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* === Header 樣式 === */
+header {
+    background-color: var(--color-primary); 
+    color: var(--color-light-text);
+    padding: 5px 0; 
+    position: fixed; 
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: padding 0.3s ease, background-color 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    transition: gap 0.3s ease; 
+}
+
+header h1 a {
+    color: var(--color-light-text);
+    text-decoration: none;
+    font-size: 1.0em; 
+    transition: font-size 0.3s ease; 
+}
+
+.header-logo-img {
+    width: 80px; 
+    height: 80px; 
+    transition: all 0.3s ease;
+    display: block; 
+}
+
+/* === Header 滾動縮小效果 === */
+header.header-scrolled {
+    padding: 0.5px 0; 
+}
+header.header-scrolled .logo-container { gap: 3px; }
+header.header-scrolled .header-logo-img { width: 50px; height: 50px; }
+header.header-scrolled h1 a { font-size: 0.8em; }
+
+/* === Nav 樣式 === */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+nav li a {
+    color: var(--color-light-text);
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+}
+nav li a:hover {
+    background-color: #E67A59;
+    border-radius: 5px;
+}
+
+/* === Hero Section (純圖片滿版橫幅) === */
+.hero-section {
+    background-image: url('images/hero_banner.png'); 
+    background-color: var(--color-secondary); 
+    background-size: cover; /* 滿版顯示 */
+    background-position: center; 
+    background-repeat: no-repeat;
+    
+    width: 100%;
+    height: 600px; /* 預設桌機高度 */
+    
+    padding: 0; 
+    margin: 0;
+    border-radius: 0; 
+    box-shadow: none;
+    display: block; 
+}
+
+@media (max-width: 1024px) {
+    .hero-section {
+        height: 400px; /* 筆電高度 */
+    }
+}
+
+/* === 首頁標語區塊 (Hero Tagline) === */
+.hero-tagline {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--color-background);
+}
+
+.hero-tagline h2 {
+    font-size: 2.5em;
+    color: var(--color-success);
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.hero-tagline p {
+    font-size: 1.4em;
+    color: var(--color-success);
+    margin: 0;
+    font-weight: bold;
+}
+
+/* === 內文區塊樣式 === */
+.content-section {
+    margin-top: 0; 
+    padding: 40px;
+    margin-bottom: 20px;
+    background-color: var(--color-light-text);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.content-section h2 {
+    color: var(--color-primary); 
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 10px;
+    /* 放大 H2 標題 */
+    font-size: 1.8em; 
+    margin-bottom: 25px;
+    margin-top: 0;
+}
+
+.content-section h3 {
+    /* 放大 H3 標題 */
+    font-size: 1.4em; 
+    color: var(--color-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* === 強調型 CTA 區塊 (標語+按鈕) === */
+.highlight-cta-section {
+    background-color: #f0fdf4;
+    border: 3px solid var(--color-success); 
+    border-radius: 15px; 
+    padding: 40px 30px;
+    margin-top: 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.highlight-cta-section h2 {
+    color: var(--color-success) !important; 
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    margin-top: 0;
+    border-bottom: none !important; 
+}
+
+.highlight-cta-section p {
+    font-size: 1.3em;
+    color: #555;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* === 頁面大標題與指引 (漸層卡片風格) === */
+.page-intro-header {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    
+    background:linear-gradient(135deg, #f7b272 0%, #f1691b 50%, #edf03c 100%); 
+    color: #fff; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 10px rgba(255, 138, 101, 0.3); 
+    border: none; 
+}
+
+/* 通用頁首元件：.page-hero 與變體 */
+.page-hero {
+    text-align: center;
+    padding: 48px 20px; /* 統一高度與內距 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 140px;
+    color: #fff;
+    border-radius: 14px;
+    border: none;
+}
+.page-hero--primary {
+    background: linear-gradient(135deg, var(--color-primary), #FFB74D);
+    box-shadow: 0 4px 10px rgba(255, 138, 101, 0.25);
+}
+.page-hero--green {
+    background: linear-gradient(135deg, #66BB6A 0%, #4DB6AC 50%, #81C784 100%);
+    box-shadow: 0 6px 18px rgba(76,175,80,0.12);
+}
+.page-hero .main-title { 
+    color: #fff; 
+    margin: 0; 
+    /* 顯著放大主標題 */
+    font-size: 3.0em; 
+}
+.page-hero p { color: rgba(255,255,255,0.95); font-weight: 600; margin: 6px 0 0 0; }
+
+.knowledge-card h2 i,
+.knowledge-card h3 i {
+    margin-right: 10px;
+    color: var(--color-teal-action);
+    font-size: 1.05em;
+    vertical-align: middle;
+}
+
+/* 知識卡片文字美化 */
+.knowledge-card h2 {
+    /* 放大 H2 */
+    font-size: 1.6em;
+    margin-top: 24px;
+    margin-bottom: 14px;
+    color: var(--color-primary);
+    font-weight: 700;
+    line-height: 1.4;
+}
+.knowledge-card h3 {
+    /* 放大 H3 */
+    font-size: 1.3em;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    color: var(--color-teal-action);
+    font-weight: 700;
+}
+.knowledge-card p {
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 12px;
+    /* 確保內文易讀 */
+    font-size: 1.15em;
+}
+.knowledge-card ul, .knowledge-card ol {
+    margin: 10px 0 0.8rem 1.25rem;
+    line-height: 2;
+}
+.knowledge-card li {
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1.05em; /* 讓列表文字也稍大 */
+}
+
+/* 響應式：手機上圖片回到居中堆疊 */
+@media (max-width: 760px) {
+    .alert-figure {
+        float: none;
+        width: 100%;
+        margin: 16px 0;
+    }
+}
+
+/* Alert figure: sarcopenia diagnosis criteria */
+.alert-figure {
+    float: right;
+    width: 480px;
+    margin: -105px 50px 60px 10px;
+    text-align: center;
+}
+.alert-figure img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+/* Guidance placeholder figure (圖片大小與置中修正) */
+.guidance-figure {
+    float: none; 
+    width: 90%; /* 圖片容器佔內容區塊 90% 的寬度 (左右留白 5%) */
+    margin: 20px auto; /* 將左右 margin 設為 auto 實現居中 */
+    max-width: 900px; /* 限制圖片在非常寬的螢幕上不會超過 900px */
+    
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    text-align: center; 
+}
+.guidance-figure img { 
+    width: 100%; 
+    max-width: 100%; /* 圖片填滿容器 */
+    height: auto; 
+    display: block; 
+}
+
+
+@media (max-width: 760px) {
+    .page-hero { padding: 36px 16px; min-height: 120px; }
+    .page-hero .main-title { font-size: 1.6em; }
+    .guidance-figure { float: none; width: 100%; margin: 12px 0; max-width: none; } /* 手機上恢復滿版 */
+}
+
+/* Guidance exercise grid: table left, figure right; responsive stack on small screens 
+   重要：確保如果 .guidance-grid 仍存在，它不會強制並排
+*/
+.guidance-grid {
+    display: block;
+    clear: both; /* 清除所有可能的浮動干擾 */
+}
+.guidance-grid .guidance-table,
+.guidance-grid .guidance-figure {
+    width: 100%;
+    margin: 10px 0;
+}
+
+/* 維持表格原樣：撤銷 .guidance-table 的寬度限制與置中 */
+.guidance-table {
+    width: 100%; 
+    max-width: none; 
+    margin: 0; 
+}
+
+/* Nutrition highlights */
+.nutrition-callout {
+    background: linear-gradient(90deg, rgba(255,255,255,0.9), #F7FFF9);
+    border-left: 4px solid var(--color-teal-action);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0 18px 0;
+}
+
+.nutrition-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 8px; }
+.nutrition-list .item { background: #fff; border: 1px solid rgba(0,0,0,0.04); padding: 10px; border-radius: 8px; }
+
+/* 藍色漸層變體（知識專區使用） */
+.page-hero--blue {
+    background: linear-gradient(135deg, #7bc4ff 0%, #2d41f5 45%, #7bc4ff 100%);
+    box-shadow: 0 10px 30px rgba(25,118,210,0.18);
+    padding: 48px 20px;
+    min-height: 140px;
+    border-bottom: 4px solid rgba(21,101,192,0.08);
+}
+
+/* Guidance layout tweaks to avoid long narrow blocks on mobile */
+/* *** 運動/飲食 指導內容調整 (放大文字和標題) + 移除多餘分隔線樣式 *** */
+.guidance-item { 
+    margin-bottom: 26px; 
+    position: relative; /* 為了加入分隔線做定位 */
+}
+
+.guidance-item h3 { 
+    /* 放大指導標題 */
+    font-size: 1.6em; 
+    color: var(--color-primary); 
+    margin-bottom: 12px; 
+    font-weight: 700;
+}
+.guidance-item p { 
+    /* 放大指導內文 */
+    font-size: 1.2em; 
+    margin-bottom: 15px; 
+    line-height: 1.8;
+}
+.guidance-item table { width: 100%; border-collapse: collapse; }
+.guidance-item table th, .guidance-item table td { padding: 10px; }
+.guidance-item .table-wrapper { overflow-x: auto; }
+
+@media (max-width: 760px) {
+    .page-hero--blue { padding: 36px 16px; min-height: 120px; }
+    .page-hero .main-title { font-size: 1.6em; }
+    .guidance-item h3 { font-size: 1.3em; } /* 手機上微調小一點 */
+    .guidance-item p { font-size: 1.1em; } /* 手機上微調小一點 */
+}
+
+/* 綠色系漸層橫幅（供知識專區使用） */
+.page-hero-green {
+    text-align: center;
+    padding: 36px 20px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #66BB6A 0%, #4DB6AC 50%, #81C784 100%);
+    color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(76,175,80,0.12);
+    border: none;
+}
+.page-hero-green .main-title { color: #fff; font-size: 2.2em; margin-bottom: 6px; }
+.page-hero-green p { color: rgba(255,255,255,0.95); font-weight: 600; margin: 0; }
+
+/* 知識卡片與強調區塊 */
+.knowledge-card {
+    background: linear-gradient(180deg, #ffffff, #F6FFF8);
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    border: 1px solid rgba(77,182,172,0.08);
+}
+.knowledge-card h2 { color: var(--color-teal-action); margin-top: 0; }
+
+.callout-warning {
+    background: linear-gradient(90deg, rgba(255,235,238,0.8), rgba(255,244,229,0.6));
+    border-left: 6px solid #E53935;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #6b2a2a;
+    margin: 12px 0 20px 0;
+}
+
+.key-points { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+.key-point { flex: 1 1 220px; background: #fff; padding: 12px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+.key-point strong { color: var(--color-primary); }
+
+/* 響應式微調 */
+@media (max-width: 760px) {
+    .page-hero-green .main-title { font-size: 1.6em; }
+    .key-points { flex-direction: column; }
+}
+
+.main-title {
+    font-size: 2.4em;
+    color: #fff; 
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.15); 
+}
+.main-title i {
+    margin-right: 10px;
+    color: #fff; 
+}
+
+/* === 導覽卡片容器 === */
+.nav-card-container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    padding: 0 0 30px 0 !important; 
+    overflow: hidden; 
+    border: 1px solid #eee;
+}
+
+/* === 導覽卡片內的綠色標題條 (Banner) === */
+.nav-box-title {
+    background-color: #d1e7dd; 
+    color: #0f5132; 
+    font-size: 1.4em; 
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 10px solid var(--color-success); 
+}
+.nav-box-title i {
+    margin-right: 10px;
+}
+
+/* === 操作指引文字 === */
+.nav-instruction {
+    text-align: center;
+    font-size: 1.3em;
+    color: var(--color-primary);
+    margin: 6px 0 22px 0;
+    font-weight: 700;
+}
+.nav-instruction i {
+    margin-right: 8px;
+    animation: bounce 2s infinite;
+    font-size: 1.25em;
+    vertical-align: middle;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-5px);}
+    60% {transform: translateY(-3px);}
+}
+
+/* === 問卷與表單樣式 === */
+.quiz-instruction-detail {
+    font-size: 0.95em;
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    border-left: 3px solid var(--color-teal-action);
+}
+
+.question legend { font-size: 1.25em; font-weight: bold; color: #444; padding-bottom: 5px; }
+.question label { display: block; padding: 12px; margin: 6px 0; border: 1px solid #eee; border-radius: 4px; cursor: pointer; transition: background-color 0.2s; font-size: 1.15em; }
+
+/* Input group: stack label above control with more spacing to avoid cramped text */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+.input-group label {
+    font-size: 1.05em;
+    line-height: 1.8;
+    padding: 4px 0;
+    color: var(--color-dark);
+}
+.input-group input,
+.input-group select {
+    padding: 10px 12px;
+    font-size: 1.05em;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    width: 100%;
+    max-width: none;
+}
+
+/* 每題示意圖：右側並排，手機時堆疊 */
+.question-row {
+    display: flex;
+    gap: 6px; /* 更靠近題目 */
+    align-items: flex-start; /* 頂端對齊 */
+    margin-bottom: 12px;
+}
+.question-row .question-text {
+    flex:0 0 80%;
+    min-width: 0;
+    padding-right: 6px;
+}
+.question-row .question-figure {
+    flex: 0 0 250px; /* 固定較小寬度，讓圖片大小一致 */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.question-row .question-figure img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    display: block;
+}
+.question-row .question-figure figcaption {
+    margin-top: 6px;
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+}
+
+/* 微調：讓圖片往下移一點並往左靠近題目，桌機效果更明顯 */
+.question-row .question-figure {
+    margin-top: 30px;
+    transform: translateX(40px);
+}
+
+/* 美化問卷：fieldset 與選項 */
+.question {
+    background-color: #ffffff;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 14px 16px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+}
+.question legend {
+    font-weight: 700;
+    color: var(--color-primary);
+    padding: 0 6px;
+    font-size: 1.05em;
+}
+.question label {
+    display: block;
+    padding: 8px 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    transition: background-color 0.15s ease, transform 0.08s ease;
+}
+.question label:hover {
+    background-color: #FAFAFA;
+    transform: translateY(-1px);
+}
+.question input[type="radio"] {
+    transform: scale(1.15);
+    margin-right: 8px;
+    accent-color: var(--color-primary);
+}
+.question .quiz-instruction-detail {
+    background: #FBFBFC;
+    border-left: 3px solid var(--color-accent);
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: #444;
+}
+
+/* 縮小在窄版時圖片距離與欄位調整 */
+@media (max-width: 760px) {
+    .question-row { gap: 8px; }
+    .question-row .question-figure { margin-top: 6px; max-width: 160px; transform: none; }
+    .question-row .question-figure img { max-width: 160px; }
+}
+.question-row .question-figure figcaption {
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    .question-row { flex-direction: column; }
+    .question-row .question-figure { flex: 1 1 auto; max-width: 100%; }
+}
+
+/* === 按鈕樣式 (修正：加寬) === */
+.start-button {
+    background-color: var(--color-success); 
+    color: var(--color-light-text);
+    text-decoration: none; 
+    border: none;
+    padding: 20px 80px;
+    font-size: 1.5em; 
+    cursor: pointer;
+    border-radius: 8px;
+    display: block; 
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.start-button:hover { background-color: #5AA05C; }
+
+/* Mega CTA (修正：加寬) */
+.mega-cta {
+    font-size: 1.6em !important; 
+    padding: 20px 32px !important; 
+    margin: 20px 0 !important; 
+    background-color: var(--color-teal-action) !important; 
+    border: 5px solid var(--color-primary); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 0 3px #fff; 
+    width: 100%; 
+    max-width: none;
+    display: block; 
+}
+.mega-cta:hover { background-color: #5AA05C !important; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); }
+
+/* === Icon 導引區塊 === */
+.icon-guidance-section {
+    margin-top: 20px; 
+    padding-left: 0; padding-right: 0; padding-top: 30px; padding-bottom: 30px;
+    border-radius: 0; text-align: center;
+    background-color: var(--color-cool-rest); 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.icon-cards { display: flex; justify-content: space-around; gap: 20px; padding: 0 20px; }
+.icon-card {
+    flex: 1; padding: 20px;
+    border: 1px solid var(--color-border); border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: var(--color-light-text);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); 
+    max-width: none;
+    min-width: 220px;
+}
+.icon-card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1); }
+.icon-link { text-decoration: none; color: inherit; display: block; }
+.icon-card .icon-large { background-color: transparent; color: var(--color-primary); border-radius: 0; padding: 0; font-size: 3em; margin-bottom: 15px; box-shadow: none; }
+.icon-card p { text-decoration: none !important; }
+
+/* === 影片參考區樣式 === */
+.video-section {
+    margin-top: 20px;
+    padding: 40px;
+    background-color: var(--color-light-text);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.video-section-title {
+    color: var(--color-primary);
+    text-align: center;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.video-grid {
+    display: flex;
+    flex-wrap: wrap; /* 允許換行，適應手機 */
+    justify-content: center;
+    gap: 30px;
+}
+
+.video-item {
+    flex: 1;
+    min-width: 300px; /* 手機上會變成單欄 */
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 比例 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-caption {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--color-dark);
+    font-size: 1.1em;
+}
+
+/* === 快速導航與計算按鈕 (修正版) === */
+.quiz-nav-bar { justify-content: space-evenly; gap: 10px; display: flex; width: 100%; max-width: 100%; text-align: center; flex-wrap: wrap; }
+/* Icon 文字大小設定 */
+.icon-card-small { 
+    flex: 1; 
+    padding: 20px; 
+    border: 2px solid var(--color-border); 
+    border-radius: 10px; 
+    text-decoration: none; 
+    color: var(--color-dark); 
+    font-size: 1.2em; 
+    font-weight: bold; 
+    transition: background-color 0.3s; 
+    min-width: 200px; 
+    max-width: none; 
+    text-align: center; 
+}
+.icon-card-small:hover { background-color: #F0F0F0; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); transform: translateY(-3px); }
+.icon-small { font-size: 2.5em; display: block; margin-bottom: 10px; }
+
+/* === 自我評估頁面排版 (通用) === */
+.assessment-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px; 
+    flex-wrap: wrap; 
+}
+
+.assessment-content {
+    flex: 1; 
+    min-width: 300px;
+}
+
+.assessment-image {
+    flex: 1; 
+    max-width: 600px; 
+    text-align: center; 
+    margin-top: 10px; 
+}
+
+/* 專門用於知識專區，將圖片放大的並排版面 (已優化比例：文字 1 份，圖片 2.5 份，強制放大) */
+.wide-image-layout .assessment-content {
+    flex: 1 1 300px; /* 成長權重 1, 最小起始寬度 300px (保持文字區域穩定) */
+    min-width: 300px; 
+    padding-right: 40px; 
+}
+
+.wide-image-layout .assessment-image {
+    flex: 3 1 300px; /* 成長權重 2.5 (大幅增加圖片佔用比例) */
+    max-width: 700px !important; /* 強制設定圖片最大寬度為 600px */
+    margin-right: 0; 
+}
+.wide-image-layout .assessment-image img {
+    max-width: 100% !important; /* 強制圖片在容器內縮放 */
+    height: auto;
+}
+
+
+/* 放大小腿與指環測試的圖片，保持響應式；不影響 CST 的 .img-shrink */
+#calf-section .assessment-image,
+#ring-section .assessment-image {
+    max-width: 820px; /* 讓圖片容器在桌機上可以更寬 */
+    flex: 1 1 50%;
+}
+#calf-section .assessment-image img,
+#ring-section .assessment-image img {
+    width: 100%;
+    height: auto;
+    max-width: 820px;
+}
+
+@media (max-width: 700px) {
+    #calf-section .assessment-image,
+    #ring-section .assessment-image {
+        max-width: 100%;
+        flex: 1 1 100%;
+    }
+}
+
+/* =========================================================
+   專屬版面 (只給 30秒椅子起立測試)
+   ========================================================= */
+.cst-special-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px; 
+    flex-wrap: wrap; 
+}
+
+.cst-special-layout .assessment-content {
+    flex: 1.8; 
+    min-width: 300px;
+}
+
+.cst-special-layout .assessment-image {
+    flex: 0.8; 
+    max-width: 600px; 
+    text-align: center; 
+    margin-top: 10px; 
+}
+
+.cst-special-layout .assessment-image img {
+    height: auto;
+}
+
+/* 專門控制 CST 圖片大小 (100%) */
+.cst-special-layout .assessment-image .img-shrink {
+    width: 100% !important; /* 加大到 100% */
+    display: inline-block; 
+}
+
+/* 圖片說明文字樣式 */
+.image-caption {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+    text-align: center; 
+    width: 100%; 
+}
+
+/* === 計算按鈕 === */
+#calculate-calf, #calculate-ring, #calculate-cst { background-color: var(--color-success); color: var(--color-light-text); border: none; padding: 10px 25px; font-size: 1.1em; cursor: pointer; border-radius: 6px; display: block; width: 100%; max-width: none; margin-top: 10px; margin-bottom: 20px; transition: background-color 0.3s; }
+#calculate-calf:hover, #calculate-ring:hover, #calculate-cst:hover { background-color: #5AA05C; }
+#calculate-button { background-color: var(--color-teal-action); color: var(--color-light-text); border: none; padding: 15px 30px; font-size: 1.2em; cursor: pointer; border-radius: 6px; display: block; width: 100%; margin-top: 30px; transition: background-color 0.3s; }
+#calculate-button:hover { background-color: #45A599; }
+
+/* === 30秒測試步驟與警示樣式 === */
+.warning-message {
+    color: #D32F2F;
+    background-color: #FFEBEE;
+    padding: 15px;
+    border-left: 5px solid #D32F2F;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.warning-message i { margin-right: 8px; }
+
+.cst-text-style {
+    font-size: 1.1em; 
+    line-height: 2.5;  
+    color: #333; 
+}
+.cst-text-style li { margin-bottom: 15px; }
+.cst-text-style strong { color: var(--color-primary); }
+
+.steps-list { padding-left: 20px; line-height: 3; }
+.steps-list li { margin-bottom: 10px; }
+.steps-list strong { color: var(--color-primary); }
+
+/* === 錨點定位修正 === */
+#sarcf-test, #calf-section, #ring-section, #cst-section {
+    scroll-margin-top: 100px;
+}
+
+/* === 分隔線優化 (維持統一的 icon 樣式) === */
+/* 通用分隔線 */
+.section-divider {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-teal-action), transparent);
+    margin: 60px 0;
+    position: relative;
+    opacity: 0.95;
+    border-radius: 2px;
+}
+.section-divider::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--color-teal-action);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border-radius: 3px;
+    box-shadow: 0 4px 10px rgba(77,182,172,0.12);
+    border: 3px solid var(--color-background);
+}
+
+.section-divider-small {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+    margin: 25px 0;
+    opacity: 0.9;
+}
+
+/* 細點狀風格 */
+.divider-dotted {
+    border: 0;
+    height: 0;
+    border-top: 4px dotted rgba(0,0,0,0.08);
+    margin: 40px 0;
+}
+
+/* 漸層厚條 */
+.divider-gradient {
+    height: 6px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, rgba(77,182,172,0.15), var(--color-teal-action), rgba(77,182,172,0.15));
+    margin: 40px 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* 中置文字分隔線，將文字放在中間 */
+.divider-with-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-dark);
+    font-weight: 600;
+    margin: 40px 0;
+    font-size: 0.95em;
+}
+.divider-with-text::before,
+.divider-with-text::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+.divider-with-text span {
+    padding: 8px 14px;
+    background: var(--color-light-text);
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* 中置小圖示分隔線（統一為 icon 樣式） */
+.divider-icon {
+    position: relative;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);
+    margin: 40px 0;
+}
+.divider-icon::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    background: var(--color-light-text);
+    padding: 6px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    color: var(--color-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+/* === 表格樣式 === */
+table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+table, th, td { border: 1px solid #ddd; }
+th, td { padding: 12px; text-align: left; width: 33.33%; }
+th { background-color: var(--color-accent); color: var(--color-dark); }
+
+/* 表格縮小與字體縮小樣式 */
+.small-table {
+    width: 100% !important; 
+    margin: 20px 0 !important; 
+}
+
+.small-table th, 
+.small-table td {
+    font-size: 0.95em; 
+    text-align: center; 
+}
+/* === 結果框 === */
+.result-box { margin-top: 25px !important; padding: 20px !important; border-radius: 10px; font-size: 1.2em; font-weight: bold; border: 3px solid; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); transition: all 0.3s ease; }
+.result-box h4 { margin-top: 0; color: var(--color-dark); font-size: 1.4em; }
+.risk-high { background-color: var(--risk-high); border-color: #E57373; }
+.risk-moderate { background-color: var(--risk-moderate); border-color: #FFB74D; }
+.risk-low { background-color: var(--risk-low); border-color: #81C784; }
+
+/* === 回到頂部按鈕 (已修改為 TOP 文字) === */
+#back-to-top { 
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 999; 
+    border: none; 
+    outline: none; 
+    background-color: var(--color-primary); 
+    color: var(--color-light-text); 
+    cursor: pointer; 
+    width: 50px; 
+    height: 50px; 
+    padding: 0; 
+    line-height: 50px; 
+    text-align: center; 
+    font-size: 1.0em; /* 調整大小以適應 TOP 文字 */
+    font-weight: bold; /* 讓 TOP 更顯眼 */
+    border-radius: 50%; 
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); 
+    transition: background-color 0.3s, transform 0.2s; 
+}
+#back-to-top:hover { background-color: #E67A59; transform: translateY(-2px); }
+
+/* === Footer === */
+footer { background-color: var(--color-dark); color: #ddd; text-align: center; padding: 20px 0; margin-top: 30px; font-size: 0.9em; }
